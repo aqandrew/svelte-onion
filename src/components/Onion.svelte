@@ -7,7 +7,7 @@
 
 <g class="onion">
 	{#each { length: numLayers } as _, i}
-		<circle cx={width / 2} cy={height} r={rScale(i)} />
+		<circle cx={width / 2} cy={height} r={rScale(i + 1)} />
 	{/each}
 </g>
 

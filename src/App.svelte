@@ -9,20 +9,17 @@
 	let width = 600;
 	let height = width / 2;
 	let numLayers = 10;
-	let numCuts = numLayers;
+	let numCuts = numLayers + 1;
 	let cutType = 'vertical';
 
 	const maxRadiusProportion = 0.8; // proportional to graph height
-	let maxRadius = height * maxRadiusProportion;
-	let minRadius = maxRadius / numLayers;
+	const maxRadius = height * maxRadiusProportion;
 
-	const rScale = scaleLinear()
-		.domain([0, numLayers])
-		.range([minRadius, maxRadius]);
+	const rScale = scaleLinear().domain([0, numLayers]).range([0, maxRadius]);
 
 	const cutScale = scaleLinear()
-		.domain([0, numCuts])
-		.range([width / 2 - minRadius, width / 2 - maxRadius]);
+		.domain([0, numLayers])
+		.range([width / 2, width / 2 - maxRadius]);
 </script>
 
 <svg {width} {height}>
@@ -35,7 +32,7 @@
 
 	<g class="cuts">
 		{#if cutType === 'vertical'}
-			<VerticalCuts {width} {height} numCuts={numLayers} {cutScale} />
+			<VerticalCuts {width} {height} {numCuts} {cutScale} />
 		{:else if cutType === 'radial'}
 			<RadialCuts />
 		{/if}>
