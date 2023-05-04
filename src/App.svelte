@@ -9,7 +9,8 @@
 	let width = 600;
 	let height = width / 2;
 	let numLayers = 10;
-	let numCuts = numLayers + 1;
+	let maxCuts = numLayers;
+	let numCuts = maxCuts;
 	let cutType = 'vertical';
 
 	const maxRadiusProportion = 0.8; // proportional to graph height
@@ -17,8 +18,9 @@
 
 	const rScale = scaleLinear().domain([0, numLayers]).range([0, maxRadius]);
 
+	// TODO cut width should change with numCuts
 	const cutScale = scaleLinear()
-		.domain([0, numLayers])
+		.domain([0, numCuts])
 		.range([width / 2, width / 2 - maxRadius]);
 </script>
 
@@ -32,7 +34,7 @@
 
 	<g class="cuts">
 		{#if cutType === 'vertical'}
-			<VerticalCuts {width} {height} {numCuts} {cutScale} />
+			<VerticalCuts {height} {numCuts} {cutScale} />
 		{:else if cutType === 'radial'}
 			<RadialCuts />
 		{/if}>
@@ -40,6 +42,11 @@
 </svg>
 
 <div class="controls">
+	<label class="cut-slider-control">
+		number of cuts: {numCuts}
+		<input type="range" bind:value={numCuts} min="1" max={maxCuts} step="1" />
+	</label>
+
 	<fieldset>
 		<legend>cut type</legend>
 
@@ -69,6 +76,10 @@
 </div>
 
 <style>
+	svg {
+		margin-bottom: 2rem;
+	}
+
 	:global(line) {
 		stroke: black;
 	}
@@ -79,6 +90,11 @@
 
 	.controls label {
 		cursor: pointer;
+	}
+
+	.cut-slider-control {
+		display: inline-flex;
+		flex-direction: column;
 	}
 
 	.radio-group {
