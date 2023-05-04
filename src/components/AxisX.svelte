@@ -6,4 +6,10 @@
 	let y = isBottom ? height : 0;
 </script>
 
-<line x1="0" y1={y} x2={width} y2={y} stroke="black" />
+<line x1="0" y1={y} x2={width} y2={y} />
+
+<style>
+	line {
+		stroke-width: 2;
+	}
+</style>

@@ -5,4 +5,4 @@
 	let x = width / 2;
 </script>
 
-<line x1={x} y1={0} x2={x} y2={height} stroke="black" />
+<line x1={x} y1={0} x2={x} y2={height} />
