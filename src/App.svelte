@@ -1,7 +1,14 @@
 <script>
-	import Example from './components/Example.svelte';
+	import AxisX from './components/AxisX.svelte';
+	import AxisY from './components/AxisY.svelte';
+
+	let width = 600;
+	let height = width / 2;
 </script>
 
-<h1>is this an onion?</h1>
-
-<Example />
+<svg {width} {height}>
+	<AxisX {width} {height} />
+	<AxisX {width} {height} isBottom />
+	<!-- TODO responsive sizing: move y axis when screen resizes -->
+	<AxisY {width} {height} />
+</svg>
