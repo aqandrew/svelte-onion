@@ -14,12 +14,9 @@
 	{@const xIntercept = radius * Math.sin(theta)}
 	{@const yIntercept = radius * Math.cos(theta)}
 
-	<!-- TODO must maintain original exterior intercepts -->
-	<!--   instead of keeping x1 and y1 constant as cut target changes -->
-	<!-- probably best to use more scaleLinear to avoid confusion -->
 	<line
 		x1={width / 2 - xIntercept * 2}
-		y1={height - yIntercept * 2}
+		y1={height - yIntercept * 2 - cutTargetDepthPercentage * height}
 		x2={width / 2}
 		y2={height + cutTargetDepthPercentage * height}
 	/>
