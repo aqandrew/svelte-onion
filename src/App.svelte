@@ -18,8 +18,7 @@
 
 	const rScale = scaleLinear().domain([0, numLayers]).range([0, maxRadius]);
 
-	// TODO cut width should change with numCuts
-	const cutScale = scaleLinear()
+	$: cutScale = scaleLinear()
 		.domain([0, numCuts])
 		.range([width / 2, width / 2 - maxRadius]);
 </script>
