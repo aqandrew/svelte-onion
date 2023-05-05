@@ -1,5 +1,6 @@
 <script>
 	import { scaleLinear } from 'd3-scale';
+	import { format } from 'd3-format';
 	import AxisX from './components/AxisX.svelte';
 	import AxisY from './components/AxisY.svelte';
 	import Onion from './components/Onion.svelte';
@@ -26,6 +27,10 @@
 	$: cutAngleScale = scaleLinear()
 		.domain([0, numCuts])
 		.range([0, Math.PI / 2]);
+
+	function formatPercentageAsNegative(n) {
+		return format('.0%')(-n);
+	}
 </script>
 
 <svg {width} {height}>
@@ -88,8 +93,7 @@
 	{#if cutType === 'radial'}
 		<label class="slider-control">
 			cut target height:
-			{cutTargetDepthPercentage ? '-' : ''}{cutTargetDepthPercentage * 100}% of
-			outer radius
+			{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius
 			<input
 				type="range"
 				bind:value={cutTargetDepthPercentage}
