@@ -88,7 +88,7 @@
 		stroke-dasharray: 5;
 	}
 
-	.controls label {
+	.controls :is(label, input) {
 		cursor: pointer;
 	}
 
