@@ -4,8 +4,7 @@
 	import AxisX from './components/AxisX.svelte';
 	import AxisY from './components/AxisY.svelte';
 	import Onion from './components/Onion.svelte';
-	import RadialCuts from './components/RadialCuts.svelte';
-	import VerticalCuts from './components/VerticalCuts.svelte';
+	import Cuts from './components/Cuts.svelte';
 
 	let width = 600;
 	let height = width / 2;
@@ -15,18 +14,10 @@
 	let cutType = 'radial';
 	let cutTargetDepthPercentage = 0;
 
-	const maxRadiusPercentage = 0.8; // proportional to graph height
-	const maxRadius = height * maxRadiusPercentage;
+	const radiusPercentage = 0.8; // proportional to graph height
+	const radius = height * radiusPercentage;
 
-	const rScale = scaleLinear().domain([0, numLayers]).range([0, maxRadius]);
-
-	$: cutWidthScale = scaleLinear()
-		.domain([0, numCuts])
-		.range([width / 2, width / 2 - maxRadius]);
-
-	$: cutAngleScale = scaleLinear()
-		.domain([0, numCuts])
-		.range([0, Math.PI / 2]);
+	const rScale = scaleLinear().domain([0, numLayers]).range([0, radius]);
 
 	function formatPercentageAsNegative(n) {
 		return format('.0%')(-n);
@@ -41,20 +32,14 @@
 
 	<Onion {width} {height} {numLayers} {rScale} />
 
-	<g class="cuts">
-		{#if cutType === 'vertical'}
-			<VerticalCuts {height} {numCuts} cutScale={cutWidthScale} />
-		{:else if cutType === 'radial'}
-			<RadialCuts
-				{width}
-				{height}
-				{numCuts}
-				radius={maxRadius}
-				{cutTargetDepthPercentage}
-				cutScale={cutAngleScale}
-			/>
-		{/if}>
-	</g>
+	<Cuts
+		{cutType}
+		{numCuts}
+		{width}
+		{height}
+		{radius}
+		{cutTargetDepthPercentage}
+	/>
 </svg>
 
 <div class="controls">
