@@ -3,12 +3,8 @@
 	export let height;
 	export let numCuts;
 	export let radius;
+	export let cutTargetDepthPercentage;
 	export let cutScale;
-
-	let cutTarget = {
-		x: width / 2,
-		y: height,
-	};
 </script>
 
 {#each { length: numCuts } as _, i}
@@ -18,10 +14,13 @@
 	{@const xIntercept = radius * Math.sin(theta)}
 	{@const yIntercept = radius * Math.cos(theta)}
 
+	<!-- TODO must maintain original exterior intercepts -->
+	<!--   instead of keeping x1 and y1 constant as cut target changes -->
+	<!-- probably best to use more scaleLinear to avoid confusion -->
 	<line
 		x1={width / 2 - xIntercept * 2}
 		y1={height - yIntercept * 2}
-		x2={cutTarget.x}
-		y2={cutTarget.y}
+		x2={width / 2}
+		y2={height + cutTargetDepthPercentage * height}
 	/>
 {/each}

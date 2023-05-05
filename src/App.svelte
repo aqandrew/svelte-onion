@@ -12,9 +12,10 @@
 	let maxCuts = numLayers;
 	let numCuts = maxCuts;
 	let cutType = 'radial';
+	let cutTargetDepthPercentage = 0;
 
-	const maxRadiusProportion = 0.8; // proportional to graph height
-	const maxRadius = height * maxRadiusProportion;
+	const maxRadiusPercentage = 0.8; // proportional to graph height
+	const maxRadius = height * maxRadiusPercentage;
 
 	const rScale = scaleLinear().domain([0, numLayers]).range([0, maxRadius]);
 
@@ -44,6 +45,7 @@
 				{height}
 				{numCuts}
 				radius={maxRadius}
+				{cutTargetDepthPercentage}
 				cutScale={cutAngleScale}
 			/>
 		{/if}>
@@ -51,7 +53,7 @@
 </svg>
 
 <div class="controls">
-	<label class="cut-slider-control">
+	<label class="slider-control">
 		number of cuts: {numCuts}
 		<input type="range" bind:value={numCuts} min="1" max={maxCuts} step="1" />
 	</label>
@@ -82,6 +84,21 @@
 			</label>
 		</div>
 	</fieldset>
+
+	{#if cutType === 'radial'}
+		<label class="slider-control">
+			cut target height:
+			{cutTargetDepthPercentage ? '-' : ''}{cutTargetDepthPercentage * 100}% of
+			outer radius
+			<input
+				type="range"
+				bind:value={cutTargetDepthPercentage}
+				min="0"
+				max="1"
+				step="0.01"
+			/>
+		</label>
+	{/if}
 </div>
 
 <style>
@@ -97,11 +114,20 @@
 		stroke-dasharray: 5;
 	}
 
+	.controls {
+		width: 300px;
+	}
+
+	.slider-control,
+	fieldset {
+		margin-bottom: 1rem;
+	}
+
 	.controls :is(label, input) {
 		cursor: pointer;
 	}
 
-	.cut-slider-control {
+	.slider-control {
 		display: inline-flex;
 		flex-direction: column;
 	}
