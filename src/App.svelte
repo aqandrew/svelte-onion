@@ -75,19 +75,18 @@
 		</div>
 	</fieldset>
 
-	{#if cutType === 'radial'}
-		<label class="slider-control">
-			cut target height:
-			{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius
-			<input
-				type="range"
-				bind:value={cutTargetDepthPercentage}
-				min="0"
-				max="1"
-				step="0.01"
-			/>
-		</label>
-	{/if}
+	<label class="slider-control">
+		cut target height:
+		{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius
+		<input
+			type="range"
+			bind:value={cutTargetDepthPercentage}
+			min="0"
+			max="1"
+			step="0.01"
+			disabled={cutType !== 'radial'}
+		/>
+	</label>
 </div>
 
 <style>
@@ -119,6 +118,11 @@
 	.slider-control {
 		display: inline-flex;
 		flex-direction: column;
+	}
+
+	.slider-control:has([disabled]),
+	.slider-control input[disabled] {
+		cursor: not-allowed;
 	}
 
 	.radio-group {
