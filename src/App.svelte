@@ -11,8 +11,14 @@
 	let numLayers = 10;
 	let maxCuts = numLayers;
 	let numCuts = maxCuts;
-	let cutType = 'radial';
+	let cutType = 'vertical';
 	let cutTargetDepthPercentage = 0;
+	let debug = false;
+
+	if (debug) {
+		numLayers = 1;
+		numCuts = 1;
+	}
 
 	const radiusPercentage = 0.8; // proportional to graph height
 	const radius = height * radiusPercentage;
@@ -22,6 +28,11 @@
 	function formatPercentageAsNegative(n) {
 		return format('.0%')(-n);
 	}
+
+	// TODO for a single vertical cut,
+	//   area = integral of circle from 0 to radius
+	$: area = numCuts;
+	$: console.log({ area });
 </script>
 
 <svg {width} {height}>
