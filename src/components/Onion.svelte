@@ -1,5 +1,4 @@
 <script>
-	export let width;
 	export let height;
 	export let numLayers;
 	export let rScale;
@@ -7,7 +6,7 @@
 
 <g class="onion">
 	{#each { length: numLayers } as _, i}
-		<circle cx={width / 2} cy={height} r={rScale(i + 1)} />
+		<circle cx="0" cy={height} r={rScale(i + 1)} />
 	{/each}
 </g>
 

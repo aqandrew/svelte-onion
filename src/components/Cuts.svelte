@@ -3,14 +3,11 @@
 
 	export let cutType;
 	export let numCuts;
-	export let width;
 	export let height;
 	export let radius;
 	export let cutTargetDepthPercentage;
 
-	$: cutWidthScale = scaleLinear()
-		.domain([0, numCuts])
-		.range([width / 2, width / 2 - radius]);
+	$: cutWidthScale = scaleLinear().domain([0, numCuts]).range([0, -radius]);
 
 	$: cutAngleScale = scaleLinear()
 		.domain([0, numCuts])
@@ -31,9 +28,9 @@
 			{@const yIntercept = radius * Math.cos(theta)}
 
 			<line
-				x1={width / 2 - xIntercept * 2}
+				x1={xIntercept * -2}
 				y1={height - yIntercept * 2 - cutTargetDepthPercentage * height}
-				x2={width / 2}
+				x2="0"
 				y2={height + cutTargetDepthPercentage * height}
 			/>
 		{/if}

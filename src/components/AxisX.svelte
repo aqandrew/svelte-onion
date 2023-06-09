@@ -6,7 +6,7 @@
 	let y = isBottom ? height : 0;
 </script>
 
-<line x1="0" y1={y} x2={width} y2={y} />
+<line x1={-width / 2} y1={y} x2={width / 2} y2={y} />
 
 <style>
 	line {

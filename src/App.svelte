@@ -35,22 +35,15 @@
 	$: console.log({ area });
 </script>
 
-<svg {width} {height}>
+<svg {width} {height} viewBox="{-width / 2} 0 {width} {height}">
 	<AxisX {width} {height} />
 	<AxisX {width} {height} isBottom />
 	<!-- TODO responsive sizing: move y axis when screen resizes -->
-	<AxisY {width} {height} />
+	<AxisY {height} />
 
 	<Onion {width} {height} {numLayers} {rScale} />
 
-	<Cuts
-		{cutType}
-		{numCuts}
-		{width}
-		{height}
-		{radius}
-		{cutTargetDepthPercentage}
-	/>
+	<Cuts {cutType} {numCuts} {height} {radius} {cutTargetDepthPercentage} />
 </svg>
 
 <div class="controls">
