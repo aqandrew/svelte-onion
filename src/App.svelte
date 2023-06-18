@@ -41,7 +41,7 @@
 	<!-- TODO responsive sizing: move y axis when screen resizes -->
 	<AxisY {height} />
 
-	<Onion {width} {height} {numLayers} {rScale} />
+	<Onion {height} {numLayers} {rScale} />
 
 	<Cuts {cutType} {numCuts} {height} {radius} {cutTargetDepthPercentage} />
 </svg>
