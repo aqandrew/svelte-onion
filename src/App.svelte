@@ -40,14 +40,14 @@
 		(radius * radius * Math.asin(verticalCutThickness / radius) +
 			verticalCutThickness *
 				Math.sqrt(
-					radius * radius - verticalCutThickness * verticalCutThickness
+					radius * radius - verticalCutThickness * verticalCutThickness,
 				)) /
 		2;
 	$: console.log({ quarterOnionArea });
 	$: console.log('quarterOnionArea should be', (Math.PI * radius * radius) / 4);
 </script>
 
-<svg {width} {height} viewBox="{-width / 2} 0 {width} {height}">
+<svg viewBox="{-width / 2} 0 {width} {height}" style="--max-width: {width}px">
 	<AxisX {width} {height} />
 	<AxisX {width} {height} isBottom />
 	<!-- TODO responsive sizing: move y axis when screen resizes -->
@@ -107,6 +107,7 @@
 
 <style>
 	svg {
+		max-width: var(--max-width);
 		margin-bottom: 2rem;
 	}
 
