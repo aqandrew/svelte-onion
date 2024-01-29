@@ -1,6 +1,8 @@
 <script>
 	import { scaleLinear } from 'd3-scale';
 	import { format } from 'd3-format';
+	import 'carbon-components-svelte/css/white.css';
+	import { Slider } from 'carbon-components-svelte';
 	import AxisX from './components/AxisX.svelte';
 	import AxisY from './components/AxisY.svelte';
 	import Onion from './components/Onion.svelte';
@@ -59,10 +61,13 @@
 </svg>
 
 <div class="controls">
-	<label class="slider-control">
-		number of cuts: {numCuts}
-		<input type="range" bind:value={numCuts} min="1" max={maxCuts} step="1" />
-	</label>
+	<Slider
+		labelText="number of cuts: {numCuts}"
+		bind:value={numCuts}
+		min={1}
+		max={maxCuts}
+		hideTextInput
+	/>
 
 	<fieldset>
 		<legend>cut type</legend>
@@ -91,18 +96,17 @@
 		</div>
 	</fieldset>
 
-	<label class="slider-control">
-		cut target height:
-		{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius
-		<input
-			type="range"
-			bind:value={cutTargetDepthPercentage}
-			min="0"
-			max="1"
-			step="0.01"
-			disabled={cutType !== 'radial'}
-		/>
-	</label>
+	<Slider
+		labelText="cut target height:
+		{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius"
+		bind:value={cutTargetDepthPercentage}
+		min={0}
+		max={1}
+		maxLabel="100%"
+		step={0.01}
+		disabled={cutType !== 'radial'}
+		hideTextInput
+	/>
 </div>
 
 <style>
@@ -123,23 +127,12 @@
 		width: 300px;
 	}
 
-	.slider-control,
 	fieldset {
 		margin-bottom: 1rem;
 	}
 
 	.controls :is(label, input) {
 		cursor: pointer;
-	}
-
-	.slider-control {
-		display: inline-flex;
-		flex-direction: column;
-	}
-
-	.slider-control:has([disabled]),
-	.slider-control input[disabled] {
-		cursor: not-allowed;
 	}
 
 	.radio-group {
