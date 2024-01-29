@@ -96,6 +96,8 @@
 			hideTextInput
 		/>
 	</div>
+
+	<p>WIP by <a href="https://aqandrew.com/">Andrew Aquino</a></p>
 </div>
 
 <style>
@@ -122,5 +124,10 @@
 
 	:global(.bx--form-item) {
 		margin-bottom: 1rem;
+	}
+
+	p {
+		margin-top: 4rem;
+		text-align: center;
 	}
 </style>
