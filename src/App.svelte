@@ -53,52 +53,57 @@
 	$: console.log('quarterOnionArea should be', (Math.PI * radius * radius) / 4);
 </script>
 
-<svg viewBox="{-width / 2} 0 {width} {height}" style="--max-width: {width}px">
-	<AxisX {width} {height} />
-	<AxisX {width} {height} isBottom />
-	<!-- TODO responsive sizing: move y axis when screen resizes -->
-	<AxisY {height} />
+<div class="container" style="--max-width: {width}px">
+	<svg viewBox="{-width / 2} 0 {width} {height}">
+		<AxisX {width} {height} />
+		<AxisX {width} {height} isBottom />
+		<!-- TODO responsive sizing: move y axis when screen resizes -->
+		<AxisY {height} />
 
-	<Onion {height} {numLayers} {rScale} />
+		<Onion {height} {numLayers} {rScale} />
 
-	<Cuts {cutType} {numCuts} {height} {radius} {cutTargetDepthPercentage} />
-</svg>
+		<Cuts {cutType} {numCuts} {height} {radius} {cutTargetDepthPercentage} />
+	</svg>
 
-<div class="controls">
-	<Slider
-		labelText="number of cuts: {numCuts}"
-		bind:value={numCuts}
-		min={1}
-		max={maxCuts}
-		hideTextInput
-	/>
+	<div class="controls">
+		<Slider
+			labelText="number of cuts: {numCuts}"
+			bind:value={numCuts}
+			min={1}
+			max={maxCuts}
+			hideTextInput
+		/>
 
-	<RadioButtonGroup
-		legendText="cut type"
-		name="cut-type"
-		bind:selected={cutType}
-		orientation="vertical"
-	>
-		<RadioButton labelText="vertical" value="vertical" />
-		<RadioButton labelText="radial" value="radial" />
-	</RadioButtonGroup>
+		<RadioButtonGroup
+			legendText="cut type"
+			name="cut-type"
+			bind:selected={cutType}
+			orientation="vertical"
+		>
+			<RadioButton labelText="vertical" value="vertical" />
+			<RadioButton labelText="radial" value="radial" />
+		</RadioButtonGroup>
 
-	<Slider
-		labelText="cut target height:
+		<Slider
+			labelText="cut target height:
 		{formatPercentageAsNegative(cutTargetDepthPercentage)} of outer radius"
-		bind:value={cutTargetDepthPercentage}
-		min={0}
-		max={1}
-		maxLabel="100%"
-		step={0.01}
-		disabled={cutType !== 'radial'}
-		hideTextInput
-	/>
+			bind:value={cutTargetDepthPercentage}
+			min={0}
+			max={1}
+			maxLabel="100%"
+			step={0.01}
+			disabled={cutType !== 'radial'}
+			hideTextInput
+		/>
+	</div>
 </div>
 
 <style>
-	svg {
+	.container {
 		max-width: var(--max-width);
+	}
+
+	svg {
 		margin-bottom: 2rem;
 	}
 
@@ -112,9 +117,10 @@
 
 	.controls {
 		width: 300px;
+		margin-inline: auto;
 	}
 
 	:global(.bx--form-item) {
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 	}
 </style>
