@@ -2,7 +2,11 @@
 	import { scaleLinear } from 'd3-scale';
 	import { format } from 'd3-format';
 	import 'carbon-components-svelte/css/white.css';
-	import { Slider } from 'carbon-components-svelte';
+	import {
+		RadioButtonGroup,
+		RadioButton,
+		Slider,
+	} from 'carbon-components-svelte';
 	import AxisX from './components/AxisX.svelte';
 	import AxisY from './components/AxisY.svelte';
 	import Onion from './components/Onion.svelte';
@@ -69,32 +73,15 @@
 		hideTextInput
 	/>
 
-	<fieldset>
-		<legend>cut type</legend>
-
-		<div class="radio-group">
-			<label>
-				<input
-					type="radio"
-					name="cut-type"
-					bind:group={cutType}
-					value="vertical"
-					checked
-				/>
-				vertical
-			</label>
-
-			<label>
-				<input
-					type="radio"
-					name="cut-type"
-					bind:group={cutType}
-					value="radial"
-				/>
-				radial
-			</label>
-		</div>
-	</fieldset>
+	<RadioButtonGroup
+		legendText="cut type"
+		name="cut-type"
+		bind:selected={cutType}
+		orientation="vertical"
+	>
+		<RadioButton labelText="vertical" value="vertical" />
+		<RadioButton labelText="radial" value="radial" />
+	</RadioButtonGroup>
 
 	<Slider
 		labelText="cut target height:
@@ -127,16 +114,7 @@
 		width: 300px;
 	}
 
-	fieldset {
-		margin-bottom: 1rem;
-	}
-
-	.controls :is(label, input) {
-		cursor: pointer;
-	}
-
-	.radio-group {
-		display: flex;
-		flex-direction: column;
+	:global(.bx--form-item) {
+		margin-bottom: 2rem;
 	}
 </style>
