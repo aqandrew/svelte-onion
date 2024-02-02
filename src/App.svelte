@@ -97,12 +97,18 @@
 		/>
 	</div>
 
-	<p>WIP by <a href="https://aqandrew.com/">Andrew Aquino</a></p>
+	<p>
+		WIP by
+		<a href="https://twitter.com/aqandrew/status/1476605013745029135">
+			Andrew Aquino
+		</a>
+	</p>
 </div>
 
 <style>
 	.container {
 		max-width: var(--max-width);
+		margin-inline: auto;
 	}
 
 	svg {
